@@ -1,6 +1,7 @@
 import { StarIcon } from '@heroicons/react/solid';
 import Image from 'next/image'
-import React, { useState } from 'react'
+import { useState } from 'react'
+
 
 const MAX_RATING = 5;
 const MIN_RATING = 1;

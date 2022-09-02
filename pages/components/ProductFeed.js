@@ -1,5 +1,6 @@
-import React from 'react'
+
 import Product from './Product'
+
 
 function ProductFeed({ products }) {
     return (
