@@ -42,7 +42,7 @@ function Header() {
                 </p>
                 <p className='cursor-pointer hover:underline '>Prime Videos</p>
                 <p className='cursor-pointer hover:underline '>Amazon Business</p>
-                <p className='cursor-pointer hover:underline '>Today's Deals</p>
+                <p className='cursor-pointer hover:underline '>Today&apos;s Deals</p>
                 <p className='cursor-pointer hover:underline hidden lg:inline-flex'>Electronics</p>
                 <p className='cursor-pointer hover:underline hidden lg:inline-flex'>Food & Groceries</p>
                 <p className='cursor-pointer hover:underline hidden lg:inline-flex'>Prime</p>
