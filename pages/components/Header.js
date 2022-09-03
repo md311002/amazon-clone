@@ -1,13 +1,22 @@
 import Image from 'next/image'
-
+import { signIn, signOut, useSession } from 'next-auth/react'
 import { MenuIcon, SearchIcon, ShoppingCartIcon } from "@heroicons/react/outline"
+import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux';
+import { selectItems } from '../slices/basketSlice';
 
 function Header() {
+    const { data: session, status } = useSession();
+    const router = useRouter();
+    const items = useSelector(selectItems);
+
+
     return (
         <header>
             <div className='flex items-center bg-amazon_blue p-1 flex-grow py-2'>
                 <div className='flex flex-grow sm:flex-grow-0  items-center mt-2 '>
                     <Image
+                        onClick={() => router.push('/')}
                         src='https://links.papareact.com/f90'
                         height={40}
                         width={140}
@@ -20,16 +29,18 @@ function Header() {
                     <SearchIcon className="h-12 p-4"></SearchIcon>
                 </div>
                 <div className='text-white flex space-x-6 mx-6 items-center text-xs  whitespace-nowrap'>
-                    <div className='cursor-pointer hover:underline'>
-                        <p>Hello Meet Dhabaliya</p>
+                    <div onClick={!session ? signIn : signOut} className='cursor-pointer hover:underline'>
+                        <p>{session ? `Hello, ${session.user.name}` : "Sign In"}</p>
                         <p className='font-extrabold'>Account & Lists</p>
                     </div>
                     <div className='cursor-pointer hover:underline'>
                         <p>Returns</p>
                         <p className='font-extrabold'>& Orders</p>
                     </div>
-                    <div className='relative flex items-center cursor-pointer hover:underline'>
-                        <span className='absolute top-0 right-0  md:right-10 bg-yellow-500 text-center text-black rounded-full h-4 w-4'>0</span>
+                    <div onClick={() => router.push('/checkout')} className='relative flex items-center cursor-pointer hover:underline'>
+                        <span className='absolute top-0 right-0  md:right-10 bg-yellow-500 text-center text-black rounded-full h-4 w-4'>
+                            {items.length}
+                        </span>
                         <ShoppingCartIcon className='h-10'></ShoppingCartIcon>
                         <p className='hidden md:inline font-extrabold md:text-sm mt-2'>Basket</p>
                     </div>
