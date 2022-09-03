@@ -34,7 +34,7 @@ function Product({ id, price, category, title, description, image }) {
         <div className='relative  flex m-5 flex-col bg-white z-30 p-10'>
             <p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>
 
-            <Image src={image} height={200} width={200} objectFit='contain'></Image>
+            <Image alt='fowfo' src={image} height={200} width={200} objectFit='contain'></Image>
 
             <h4 className='my-3'>{title}</h4>
 
