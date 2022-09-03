@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { useSelector } from 'react-redux'
 import Header from './components/Header'
-import { selectItems, selectTotal } from './slices/basketSlice'
+import { selectItems, selectTotal } from '../slices/basketSlice'
 import CheckoutProduct from './components/CheckoutProduct'
 import { useSession } from 'next-auth/react'
 
