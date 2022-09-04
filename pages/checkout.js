@@ -6,7 +6,7 @@ import CheckoutProduct from './components/CheckoutProduct'
 import { useSession } from 'next-auth/react'
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios'
-const stripePromise = loadStripe(process.env.stripe_public_key);
+const stripePromise = loadStripe('pk_test_51LeAykSFhVjPgclOnAtUjpZAp0BVPOBVEx9jfm7rTsDWO7l5mFxBtCSAizhS96h6SgE6KPMkRfthGqYkkiPxrtcK00nHvS804r');
 
 function Checkout() {
     const items = useSelector(selectItems);
