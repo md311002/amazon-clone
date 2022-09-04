@@ -13,9 +13,10 @@ function Checkout() {
     const { data: session } = useSession();
     const total = useSelector(selectTotal);
 
-    async function createCheckoutSession() {
+    const createCheckoutSession = async () => {
         const stripe = await stripePromise;
 
+        console.log(process.env.stripe_public_key)
         const checkoutSession = await axios.post(
             '/api/create-checkout-session', {
             items: items,
