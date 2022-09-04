@@ -4,11 +4,27 @@ import Header from './components/Header'
 import { selectItems, selectTotal } from '../slices/basketSlice'
 import CheckoutProduct from './components/CheckoutProduct'
 import { useSession } from 'next-auth/react'
+import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios'
+const stripePromise = loadStripe('pk_test_51LeAykSFhVjPgclOnAtUjpZAp0BVPOBVEx9jfm7rTsDWO7l5mFxBtCSAizhS96h6SgE6KPMkRfthGqYkkiPxrtcK00nHvS804r');
 
 function Checkout() {
     const items = useSelector(selectItems);
     const { data: session } = useSession();
-    const total = useSelector(selectTotal)
+    const total = useSelector(selectTotal);
+
+    const createCheckoutSession = async () => {
+        const stripe = await stripePromise;
+
+        console.log(process.env.stripe_public_key)
+        const checkoutSession = await axios.post(
+            '/api/create-checkout-session', {
+            items: items,
+            email: session.user.email
+        }
+        )
+
+    }
 
     return (
         <div className='bg-gray-100'>
@@ -56,6 +72,8 @@ function Checkout() {
                                 <span className='font-bold'>{`$` + `${total}`}</span>
                             </h2>
                             <button
+                                role='link'
+                                onClick={createCheckoutSession}
                                 disabled={!session}
                                 className={`mx-auto md:text-sm border-none  w-full active:from-gray-500 p-2 text-xs bg-gradient-to-b from-yellow-200 to-yellow-400 border border-yellow-300 rounded-sm mt-2 focus:outline-none    ${!session && 'from-gray-300 to-gray-500 border-gray-200 text-gray-300'}`}>
                                 {!session ? 'Sign In to Checkout' : 'Proceed to Checkout'}
